@@ -1,0 +1,38 @@
+# Arquivos de ambiente
+.env
+.env.*
+*.env
+
+# Sessões e credenciais do Telegram / outros serviços
+*.session
+*.session-journal
+
+# Ambiente virtual Python
+.venv/
+venv/
+ENV/
+env/
+
+# Arquivos de cache e compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Dados temporários
+tmp/
+temp/
+
+# Configuração local do VSCode
+.vscode/
+
+# Arquivos de build / distribuição
+build/
+dist/
+*.egg-info/
+
+# MacOS
+.DS_Store

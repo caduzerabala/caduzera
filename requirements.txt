@@ -1,0 +1,4 @@
+# Dependências opcionais para módulos específicos
+telethon>=1.36
+python-dotenv>=1.0
+pydantic-settings>=2.0
