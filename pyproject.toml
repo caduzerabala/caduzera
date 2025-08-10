@@ -8,13 +8,13 @@ version = "0.1.0"
 description = "Libs reutilizáveis do Cadu"
 requires-python = ">=3.10"
 dependencies = [
-  "pydantic-settings>=2.4",         # base (leve)
-  "python-dotenv>=1.0",             # carregar .env facilmente
+  "pydantic-settings>=2.4",
+  "python-dotenv>=1.0"
 ]
 
 [project.optional-dependencies]
 telegram = [
-  "telethon>=1.36.0",
+  "telethon>=1.36"
 ]
 
 [tool.setuptools.packages.find]
