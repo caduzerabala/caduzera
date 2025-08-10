@@ -1,24 +1,20 @@
+import asyncio
+from typing import Optional, Union
 from telethon import TelegramClient
-from typing import Optional
-from .client import new_client, run_once, settings
+from .client import get_settings
 
-# -------- one-shot (síncrono) ----------
-def send_text_once(text: str, target: Optional[str] = None):
-    """Cria client, envia e fecha (ideal para relatórios/alertas)."""
-    s = settings()
+def send_text_once(text: str, target: Optional[Union[int, str]] = None):
+    """
+    Conecta, envia e desconecta em um único loop (ideal p/ relatórios/alertas).
+    Usa TELEGRAM_TARGET como padrão se 'target' não for passado.
+    """
+    s = get_settings()
     t = target or s.TELEGRAM_TARGET or "me"
 
     async def _run():
-        c = new_client()
-        await c.start()
-        await c.send_message(t, text)
-        await c.disconnect()
+        client = TelegramClient(s.TELEGRAM_SESSION_NAME, s.TELEGRAM_API_ID, s.TELEGRAM_API_HASH)
+        await client.start()
+        await client.send_message(t, text)
+        await client.disconnect()
 
-    return run_once(_run())
-
-# -------- assíncrono (usar com ensure_started) ----------
-async def a_send_text(client: TelegramClient, text: str, target: Optional[str] = None):
-    """Usar quando seu bot já tem um loop rodando (receiver, etc.)."""
-    from .client import settings
-    s = settings()
-    await client.send_message(target or s.TELEGRAM_TARGET or "me", text)
+    asyncio.run(_run())
